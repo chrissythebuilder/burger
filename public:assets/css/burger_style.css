@@ -1,9 +1,11 @@
 body {
+    padding: 100px;
     background-color: orange;
 }
 
 h1 {
     text-align: center;
+    color: blue
 }
 
 img {
@@ -11,6 +13,7 @@ img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 100px;
 }
 
 #burger-form {

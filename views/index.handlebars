@@ -2,8 +2,32 @@
     <img src = "/img/burger.jpg">
 </div>
 
-<h1> Time to eat-da-burger </h1>
+<h1> Burger Palooza </h1>
 
+<div id = "burger-list">
+    <div class = "col-md-6">
+        {{#each burgers}}
+            {{#unless this.devoured}}
+                <form action="/burgers/{{this.id}}" method="POST">
+                {{this.burger_name}}
+                    <p class = "newBurger"> </p>
+                    <button type="submit" id = "devour-btn"> Devour It! </button>
+                </form>
+            {{/unless}}
+        {{/each}}
+    </div>
+
+    <div class = "col-md-6">
+        {{#each burgers}}
+            {{#if this.devoured}}
+                <div id = "burgerDone">
+                    {{this.burger_name}}
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+
+</div>
 
 <div id = "burger-form">
 
@@ -16,3 +40,29 @@
     <p> Are you hungry? Order some burgers now! </p>
 
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#submit").on("click", function() {
+            event.preventDefault();
+                
+            var burgerAdd = {
+                newBurger: $(".newBurger").val(),
+                devoured: false
+            };
+
+            $.ajax("/burgers/create", {
+                type: "POST",
+                data: burgerAdd
+            }). then(function() {
+
+                console.log("it's working!")
+                location.reload();
+            })
+        });
+
+        $("#devour-btn").on("click", function() {
+
+        })
+    })
+</script>
