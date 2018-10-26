@@ -8,12 +8,12 @@
     <div class = "col-md-6">
         {{#each burgers}}
             {{#unless devoured}}
+            <form class = "devour-form" action = "/burgers/devour/{{id}}" method = "POST">
                 <div id ="all-burger">
-                {{id}}.
-                {{burger_name}}
-                    <p class ="burgerReady"> </p>
-                    <button class = "burgerReady" type="submit" id = "devour-btn"> Devour It! </button>
+                    <span id ="burger-name"> {{id}}. {{burger_name}}</span>
+                    <button type="submit" id = "devour-btn" data-id = "{{id}}"> Devour It! </button>
                 </div>
+            </form>
             {{/unless}}
         {{/each}}
     </div>
@@ -24,7 +24,7 @@
             {{#if this.devoured}}
                 <div id = "burgerDone">
                     {{this.id}}. {{this.burger_name}}
-                    <p class = "newerBurger"></p>
+                    <p id = "devoured-burger">
                 </div>
             {{/if}}
         {{/each}}
@@ -39,44 +39,3 @@
         <p> Are you hungry? Order some burgers now! </p>
     </div>
 </form>
-
-<script>
-    $(document).ready(function(){
-        $(".create-form").on("submit", function() {
-            event.preventDefault();
-            
-            var newBurger = {
-                name: $("#myburger").val().trim(),
-                devoured: false
-            };
-
-            $.ajax("/burgers/create", {
-                type: "POST",
-                data: newBurger
-            }).then(
-                function() {
-                location.reload();
-            })
-            console.log("working");
-            $("#myburger").val("");
-        });
-
-        $("#devour-btn").on("click", function() {
-            event.preventDefault();
-
-            var burgerDevoured = {
-                newerBurger: $(".newerBurger").val(),
-                devoured: true
-            };
-
-            $.ajax("/burgers/:id", {
-                type: "PUT",
-                data: burgerDevoured
-            }).then(function() {
-
-                console.log("it's working again!")
-                location.reload();
-            })
-        })
-    })
-</script>

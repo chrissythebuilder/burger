@@ -1,5 +1,5 @@
 body {
-    padding: 100px;
+    padding: 50px;
     background-color: orange;
 }
 
@@ -27,6 +27,19 @@ img {
 
 #submit {
     width: 20%;
+    background: white;
 }
 
+#devour-btn {
+    background: white;
+    margin-bottom: 20px;
+}
+
+#burger-name {
+    font-weight: 800;
+    font-size: 120%;
+    padding-right: 20px;
+    text-align: center;
+    font-weight: 700;
+}
 
