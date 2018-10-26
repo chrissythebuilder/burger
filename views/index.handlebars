@@ -8,11 +8,12 @@
     <div class = "col-md-6">
         {{#each burgers}}
             {{#unless devoured}}
-                <form action = "/burgers/devoured/{{id}}" method="POST">
+                <div id ="all-burger">
                 {{id}}.
                 {{burger_name}}
-                    <button type="submit" id = "devour-btn"> Devour It! </button>
-                </form>
+                    <p class ="burgerReady"> </p>
+                    <button class = "burgerReady" type="submit" id = "devour-btn"> Devour It! </button>
+                </div>
             {{/unless}}
         {{/each}}
     </div>
@@ -30,7 +31,6 @@
     </div>
 </div>
 
-{{!-- <form action = "/burgers/create" method = "POST"> --}}
 <form class = "create-form">
     <div id = "burger-form">
         <textarea id = "myburger"> </textarea>
@@ -39,7 +39,6 @@
         <p> Are you hungry? Order some burgers now! </p>
     </div>
 </form>
-{{!-- </form> --}}
 
 <script>
     $(document).ready(function(){

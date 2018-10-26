@@ -4,13 +4,13 @@ var burgers = require("../models/burger.js");
 
 router.get("/", function(req, res) {
     burgers.selectAll(function(data) {
-        res.render("index", {burger_info: data})
+        res.render("index", {burgers: data})
     });
 });
 
 router.get("/burgers", function(req,res) {
     burgers.selectAll(function(data) {
-        res.render("index", {burger_info: data})
+        res.render("index", {burgers: data})
     });
 });
 
