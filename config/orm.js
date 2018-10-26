@@ -1,6 +1,14 @@
 var connection = require("./connection.js");
 
-// var tableName = "burgers";
+function printQuestionMarks(num) {
+    var array = [];
+
+    for (var i = 0; i < num; i++) {
+        array.push("?");
+    }
+
+    return array.toString();
+};
 
 var orm = {
     
@@ -11,7 +19,6 @@ var orm = {
             if (err) {
                 throw err;
             }
-
             cb(res);
         })
     },
@@ -26,7 +33,7 @@ var orm = {
         queryString += printQuestionMarks(vals.length);
         queryString += ") ";
 
-        // console.log(queryString);
+        console.log(queryString);
 
         connection.query(queryString, vals, function(err, res) {
             if (err) {
@@ -37,24 +44,29 @@ var orm = {
         })
     },
 
-    updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE" + table;
-
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
-
-        // console.log(queryString);
-
-        connection.query(queryString, vals, function(err, res) {
-            if (err) {
-                throw err;
-            }
-
-            cb(res)
-        })
+    updateOne: function(burgerInfo, callback) {
+        var queryString = "UPDATE burgers SET ? WHERE ?";
+        connection.query(queryString, [{devoured:true}, {id:burgerInfo}, function(req,res) {
+            if(err) {
+                throw err
+            };
+            cb(res);
+        }])
     }
+
+    // updateOne: function(table, objColVals, condition, cb) {
+    //     var queryString = "UPDATE " + table;
+
+    //     queryString += " SET ";
+    //     queryString += objToSql(objColVals);
+    //     queryString += " WHERE ";
+    //     queryString += condition;
+
+    //     connection.query(queryString, function(err, res) {
+    //         if (err) throw err;
+    //         cb(res);
+    //     })
+    // }
 
 }
 

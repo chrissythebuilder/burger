@@ -7,62 +7,77 @@
 <div id = "burger-list">
     <div class = "col-md-6">
         {{#each burgers}}
-            {{#unless this.devoured}}
-                <form action="/burgers/{{this.id}}" method="POST">
-                {{this.burger_name}}
-                    <p class = "newBurger"> </p>
+            {{#unless devoured}}
+                <form action = "/burgers/devoured/{{id}}" method="POST">
+                {{id}}.
+                {{burger_name}}
                     <button type="submit" id = "devour-btn"> Devour It! </button>
                 </form>
             {{/unless}}
         {{/each}}
     </div>
 
+{{!-- This is where the Devoured Burgers are shown --}}
     <div class = "col-md-6">
         {{#each burgers}}
             {{#if this.devoured}}
                 <div id = "burgerDone">
-                    {{this.burger_name}}
+                    {{this.id}}. {{this.burger_name}}
+                    <p class = "newerBurger"></p>
                 </div>
             {{/if}}
         {{/each}}
     </div>
-
 </div>
 
-<div id = "burger-form">
-
-    <input id = "burger-type" type = "text">
-
-    <br>
-
-    <button id = "submit"> Order </button>
-
-    <p> Are you hungry? Order some burgers now! </p>
-
-</div>
+{{!-- <form action = "/burgers/create" method = "POST"> --}}
+<form class = "create-form">
+    <div id = "burger-form">
+        <textarea id = "myburger"> </textarea>
+        <br>
+        <button id = "submit"> Order </button>
+        <p> Are you hungry? Order some burgers now! </p>
+    </div>
+</form>
+{{!-- </form> --}}
 
 <script>
     $(document).ready(function(){
-        $("#submit").on("click", function() {
+        $(".create-form").on("submit", function() {
             event.preventDefault();
-                
-            var burgerAdd = {
-                newBurger: $(".newBurger").val(),
+            
+            var newBurger = {
+                name: $("#myburger").val().trim(),
                 devoured: false
             };
 
             $.ajax("/burgers/create", {
                 type: "POST",
-                data: burgerAdd
-            }). then(function() {
-
-                console.log("it's working!")
+                data: newBurger
+            }).then(
+                function() {
                 location.reload();
             })
+            console.log("working");
+            $("#myburger").val("");
         });
 
         $("#devour-btn").on("click", function() {
+            event.preventDefault();
 
+            var burgerDevoured = {
+                newerBurger: $(".newerBurger").val(),
+                devoured: true
+            };
+
+            $.ajax("/burgers/:id", {
+                type: "PUT",
+                data: burgerDevoured
+            }).then(function() {
+
+                console.log("it's working again!")
+                location.reload();
+            })
         })
     })
 </script>
