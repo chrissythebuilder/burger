@@ -1,6 +1,6 @@
 var orm = require("../config/orm.js");
 
-var burgers = {
+var burger = {
     selectAll: function(cb) {
         orm.selectAll("burgers", function(res) {
             cb(res);
@@ -13,11 +13,12 @@ var burgers = {
         });
     },
 
-    updateOne: function(objColVals, condition, cb) {
-        orm.updateOne("burgers", objColVals, condition, function(res) {
-            cb(res);
-        });
-    },
-};
+    updateOne: function(id, cb) {
+        var condition = "id" + id;
+        orm.update("burgers", {
+            devoured: true
+        }, condition, cb);
+        }
+    }
 
-module.exports = burgers;
+module.exports = burger;

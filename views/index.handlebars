@@ -7,11 +7,12 @@
 <div id = "burger-list">
     <div class = "col-md-6">
         {{#each burgers}}
-            {{#unless devoured}}
-            <form class = "devour-form" action = "/burgers/devour/{{id}}" method = "POST">
+            {{#unless this.devoured}}
                 <div id ="all-burger">
-                    <span id ="burger-name"> {{id}}. {{burger_name}}</span>
-                    <button type="submit" id = "devour-btn" data-id = "{{id}}"> Devour It! </button>
+                    <span id ="burger-name"> {{this.id}}. {{this.burger_name}}</span>
+                    <form class = "devour-form">
+                    <input input type = "hidden" class = "burger_id" type = "text" value = {{this.id}}> <br>
+                    <button type="submit" id = "devour-btn"> Devour It! </button>
                 </div>
             </form>
             {{/unless}}
@@ -22,10 +23,7 @@
     <div class = "col-md-6">
         {{#each burgers}}
             {{#if this.devoured}}
-                <div id = "burgerDone">
-                    {{this.id}}. {{this.burger_name}}
-                    <p id = "devoured-burger">
-                </div>
+                <input class = "form-control" type = "text" plcaeholder = "{{this.id}} . {{this.burger_name}}" readonly>
             {{/if}}
         {{/each}}
     </div>
@@ -33,9 +31,9 @@
 
 <form class = "create-form">
     <div id = "burger-form">
+        <p> Are you hungry? We are ready to serve as long as you're ready to devour them! </p>
         <textarea id = "myburger"> </textarea>
         <br>
-        <button id = "submit"> Order </button>
-        <p> Are you hungry? Order some burgers now! </p>
+        <button id = "submit"> Order Now </button>
     </div>
 </form>

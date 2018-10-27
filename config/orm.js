@@ -10,6 +10,16 @@ function printQuestionMarks(num) {
     return array.toString();
 };
 
+function objToSql(ob) {
+    var arr = [];
+
+    for (var key in ob) {
+        arr.push(key + "=" + ob[key]);
+    }
+
+    return arr.toString();
+}
+
 var orm = {
     
     selectAll: function(tableInfo, cb) {
@@ -44,29 +54,27 @@ var orm = {
         })
     },
 
-    updateOne: function(burgerInfo, callback) {
-        var queryString = "UPDATE burgers SET ? WHERE ?";
-        connection.query(queryString, [{devoured:true}, {id:burgerInfo}, function(req,res) {
-            if(err) {
-                throw err
-            };
-            cb(res);
-        }])
-    }
+    // updateOne: function(burgerInfo, cb) {
+    //     console.log("work!")
+    //     var queryString = "UPDATE burgers SET ? WHERE ?";
 
-    // updateOne: function(table, objColVals, condition, cb) {
-    //     var queryString = "UPDATE " + table;
+    //     console.log(queryString);
 
-    //     queryString += " SET ";
-    //     queryString += objToSql(objColVals);
-    //     queryString += " WHERE ";
-    //     queryString += condition;
-
-    //     connection.query(queryString, function(err, res) {
-    //         if (err) throw err;
+    //     connection.query(queryString, [{devoured:true}, {id:burgerInfo}], function(err,res) {
+    //         if(err) {
+    //             throw err
+    //         };
     //         cb(res);
     //     })
     // }
+
+    updateOne: function(burgerInfo, cb) {
+        var queryString = "UPDATE burgers SET ? WHERE ?"
+        connection.query(queryString, [{devoured: true}, {id: burgerInfo}], function(err, res) {
+            if (err) throw err;
+            cb(res)
+        })
+    }
 
 }
 

@@ -1,11 +1,13 @@
 body {
-    padding: 50px;
+    padding: 50px 100px;
     background-color: orange;
 }
 
 h1 {
     text-align: center;
-    color: blue
+    color: rebeccapurple;
+    font-family: 'Black Ops One', cursive;
+    font-size: 450%;
 }
 
 img {
@@ -21,8 +23,8 @@ img {
 }
 
 #myburger {
-    height: 80px;
-    width: 200px;
+    height: 60px;
+    width: 400px;
 }
 
 #submit {
@@ -41,5 +43,10 @@ img {
     padding-right: 20px;
     text-align: center;
     font-weight: 700;
+}
+
+p {
+    margin-top: 30px;
+    font-weight: 800;
 }
 

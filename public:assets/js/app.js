@@ -18,19 +18,16 @@ $(document).ready(function(){
         $("#myburger").val("");
     });
 
-    $(".devour-form").on("submit", function() {
+    $(".devour-form").on("submit", function(event) {
         event.preventDefault();
 
-        var id = $("#devour-btn").data("id");
-
-        var devouredBurger = {
-            devoured: true
-        };
-
+        var id = $(this).children(".burger_id").val();
         $.ajax({
             method: "PUT",
-            url: "/burgers/devour/" + id
+            url: "/burgers/" + id,
         }).then(function(data) {
+            console.log("Devour Form working");
+
             location.reload();
         })
     })
