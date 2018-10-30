@@ -14,10 +14,10 @@ var burger = {
     },
 
     updateOne: function(id, cb) {
-        var condition = "id" + id;
-        orm.update("burgers", {
-            devoured: true
-        }, condition, cb);
+        console.log(id);
+        var condition = "id=" + id;
+        console.log(condition);
+        orm.updateOne("burgers", {devoured: true}, condition, cb);
         }
     }
 

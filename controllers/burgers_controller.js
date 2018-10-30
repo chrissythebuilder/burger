@@ -15,16 +15,16 @@ router.get("/burgers", function(req,res) {
 });
 
 router.post("/burgers/create", function(req, res) {
-    burger.insertOne(["burger_name","devoured"], [req.body.name,false], function(info) {
+    burger.insertOne(["burger_name","devoured"], [req.body.name,false], function() {
         res.redirect("/burgers");
     });
 });
 
 router.put("/burgers/:id", function(req, res) {
     burger.updateOne(req.params.id, function() {
-        console.log("working!");
-        res.redirect("/burgers")
-    });
+        // res.json("/")
+        res.redirect(303, "/burgers");
+    })
 });
 
 module.exports = router;

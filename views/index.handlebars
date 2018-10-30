@@ -4,31 +4,6 @@
 
 <h1> Burger Palooza </h1>
 
-<div id = "burger-list">
-    <div class = "col-md-6">
-        {{#each burgers}}
-            {{#unless this.devoured}}
-                <div id ="all-burger">
-                    <span id ="burger-name"> {{this.id}}. {{this.burger_name}}</span>
-                    <form class = "devour-form">
-                    <input input type = "hidden" class = "burger_id" type = "text" value = {{this.id}}> <br>
-                    <button type="submit" id = "devour-btn"> Devour It! </button>
-                </div>
-            </form>
-            {{/unless}}
-        {{/each}}
-    </div>
-
-{{!-- This is where the Devoured Burgers are shown --}}
-    <div class = "col-md-6">
-        {{#each burgers}}
-            {{#if this.devoured}}
-                <input class = "form-control" type = "text" plcaeholder = "{{this.id}} . {{this.burger_name}}" readonly>
-            {{/if}}
-        {{/each}}
-    </div>
-</div>
-
 <form class = "create-form">
     <div id = "burger-form">
         <p> Are you hungry? We are ready to serve as long as you're ready to devour them! </p>
@@ -37,3 +12,31 @@
         <button id = "submit"> Order Now </button>
     </div>
 </form>
+
+<div id = "burger-list">
+    <div id = "not-eaten">
+        <h3> Orders are up, devour whenever! </h3>
+        {{#each burgers}}
+            {{#unless this.devoured}}
+                <div id ="all-burger">
+                    <span id ="burger-name"> {{this.id}}. {{this.burger_name}}</span>
+
+                        <form class = "devour-form"> 
+                        <button type="submit" id = "devour-btn"> Devour It! </button> <input input type = "hidden" class = "burger_id" type = "text" value = {{this.id}}> <br>
+                        </form>
+
+                </div>
+            {{/unless}}
+        {{/each}}
+    </div>
+
+{{!-- This is where the Devoured Burgers are shown --}}
+    <div id = "eaten">
+        <h3> I hope you enjoyed that! </h3>
+        {{#each burgers}}
+            {{#if this.devoured}}
+                <input class = "form-control" type = "text" placeholder = "{{this.id}} . {{this.burger_name}}" readonly>
+            {{/if}}
+        {{/each}}
+    </div>
+</div>
