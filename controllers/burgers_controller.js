@@ -22,7 +22,6 @@ router.post("/burgers/create", function(req, res) {
 
 router.put("/burgers/:id", function(req, res) {
     burger.updateOne(req.params.id, function() {
-        // res.json("/")
         res.redirect(303, "/burgers");
     })
 });
